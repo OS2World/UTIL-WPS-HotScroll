@@ -1,0 +1,6 @@
+NAME tester WINDOWCOMPAT
+IMPORTS  hotscrl.HotScrollHookInit
+         hotscrl.HotScrollHookKill
+         hotscrl.HotScrollWaitLoaded
+         hotscrl.HotScrollLoaded
+

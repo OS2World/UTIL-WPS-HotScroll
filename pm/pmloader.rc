@@ -1,0 +1,150 @@
+#include <os2.h>
+#include "pmloader.h"
+
+ICON ID_MAIN pmloader.ico
+
+ACCELTABLE ID_MAIN
+BEGIN
+   "t", ID_ACTIVATION, AF_ALT
+   "p", ID_OPTIONS,    AF_ALT
+   "s", ID_TIMER_OPTIONS, AF_ALT
+   "b", ID_ABOUT,      AF_ALT
+   "o", ID_OKPB,       AF_ALT
+   "l", ID_LOADPB,     AF_ALT
+   "u", ID_UNLOADPB,   AF_ALT
+   VK_UP,	ID_NBFOCUS,  AF_VIRTUALKEY | AF_ALT
+   VK_DOWN, ID_OKFOCUS,  AF_VIRTUALKEY | AF_ALT
+END
+
+DLGTEMPLATE ID_ACTIVATION LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+	DIALOG	"Activation", ID_ACTIVATION, 0, 0, 300, 135, FS_NOBYTEALIGN | NOT
+			 FS_DLGBORDER
+	BEGIN
+
+        LTEXT       "Timer Scrolling C~ursor File", ID_DUMMY, 6, 117, 80, 8, DT_MNEMONIC | WS_GROUP
+        ENTRYFIELD  "", ID_CURSORFILE, 90, 118, 80, 8, ES_MARGIN
+
+        LTEXT       "Mouse ~Pointer File", ID_DUMMY, 6, 103, 80, 8, DT_MNEMONIC | WS_GROUP
+        ENTRYFIELD  "", ID_PTRFILE, 90, 104, 80, 8, ES_MARGIN
+
+        CONTROL     "~Scroll Lock", ID_SCROLL_LOCK, 6, 89, 68, 10, WC_BUTTON, BS_AUTO3STATE | WS_TABSTOP | WS_VISIBLE | WS_GROUP
+
+        AUTOCHECKBOX    "~Normal scrolling", ID_NORMAL, 6, 75, 60, 10, WS_GROUP
+        GROUPBOX        "Keys that must be down to scroll", ID_DUMMY, 5, 6, 172, 64, WS_GROUP
+           AUTOCHECKBOX    "~Alt", ID_ALT, 16, 50, 40, 10
+           AUTOCHECKBOX    "~Ctrl", ID_CTRL, 16, 38, 40, 10
+           AUTOCHECKBOX    "Shi~ft", ID_SHIFT, 16, 26, 40, 10
+           AUTOCHECKBOX    "Custom ~Key", ID_CUSTOMK, 16, 13, 70, 10
+           ENTRYFIELD      "", ID_CUSTOMK_FIELD, 89, 14, 50, 8, ES_MARGIN
+           AUTOCHECKBOX    "Mouse Button ~1", ID_1, 87, 50, 85, 10
+           AUTOCHECKBOX    "Mouse Button ~2", ID_2, 87, 38, 85, 10
+           AUTOCHECKBOX    "Mouse Button ~3", ID_3, 87, 26, 85, 10
+
+        AUTOCHECKBOX    "~Timer scrolling", ID_TIMER, 186, 75, 60, 10, WS_GROUP
+        GROUPBOX        "Keys that must be down to timer scroll", ID_DUMMY, 185, 6, 172, 64, WS_GROUP
+           AUTOCHECKBOX    "~Alt", ID_ALT2, 196, 50, 40, 10
+           AUTOCHECKBOX    "~Ctrl", ID_CTRL2, 196, 38, 40, 10
+           AUTOCHECKBOX    "Shi~ft", ID_SHIFT2, 196, 26, 40, 10
+           AUTOCHECKBOX    "Custom ~Key", ID_CUSTOMK2, 196, 13, 70, 10
+           ENTRYFIELD      "", ID_CUSTOMK_FIELD2, 269, 14, 50, 8, ES_MARGIN
+           AUTOCHECKBOX    "Mouse Button ~1", ID_12, 267, 50, 85, 10
+           AUTOCHECKBOX    "Mouse Button ~2", ID_22, 267, 38, 85, 10
+           AUTOCHECKBOX    "Mouse Button ~3", ID_32, 267, 26, 85, 10
+	END
+END
+
+MENU ID_POPUPMENU
+BEGIN
+    MENUITEM "~Add...    Ins",  ID_ADD
+END
+
+DLGTEMPLATE ID_OPTIONS LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+	DIALOG	"Options", ID_OPTIONS, 0, 0, 300, 135, FS_NOBYTEALIGN | NOT
+			 FS_DLGBORDER
+	BEGIN
+        ENTRYFIELD  "", ID_APP_FIELD, 7, 124, 98, 8, ES_MARGIN | WS_GROUP
+        LISTBOX     ID_APP_LIST, 6, 35, 165, 80
+        PUSHBUTTON  "~Add", ID_APP_ADD,  109, 122, 32, 12, WS_GROUP
+        PUSHBUTTON  "~Delete", ID_APP_DEL,  142, 122, 32, 12
+
+        CONTROL     "~Enable Hot Scroll", ID_ENABLE, 185, 125, 80, 10, WC_BUTTON, BS_AUTO3STATE | WS_TABSTOP | WS_VISIBLE | WS_GROUP
+        CONTROL     "~Vertically", ID_VERT, 210, 113, 45, 10, WC_BUTTON, BS_AUTO3STATE | WS_TABSTOP | WS_VISIBLE
+        CONTROL     "~Horizontally", ID_HORZ, 275, 113, 60, 10, WC_BUTTON, BS_AUTO3STATE | WS_TABSTOP | WS_VISIBLE
+        LTEXT       "Scroll", ID_DUMMY, 185, 113, 25, 8
+        LTEXT       "And", ID_DUMMY, 255, 113, 20, 8
+        CONTROL     "~Mouse Leash", ID_LEASH, 185, 101, 70, 10, WC_BUTTON, BS_AUTO3STATE | WS_TABSTOP | WS_VISIBLE | WS_GROUP
+        CONTROL     "~Reversed Scrolling", ID_REVERSED, 185, 89, 80, 10, WC_BUTTON, BS_AUTO3STATE | WS_TABSTOP | WS_VISIBLE
+        CONTROL     "~No Focus Lock", ID_FOCUS_LOCK, 275, 101, 89, 10, WC_BUTTON, BS_AUTO3STATE | WS_TABSTOP | WS_VISIBLE
+        CONTROL     "~Fake Dynamic Scrolling", ID_REDRAW, 275, 89, 84, 10, WC_BUTTON, BS_AUTO3STATE | WS_TABSTOP | WS_VISIBLE
+        CONTROL     "~Speed of Scrolling", ID_SPEED, 185, 73, 82, 10, WC_BUTTON, BS_AUTO3STATE | WS_TABSTOP | WS_VISIBLE | WS_GROUP
+        SPINBUTTON  ID_SPEEDSPIN, 270, 74, 37, 12, SPBS_NUMERICONLY | SPBS_MASTER | SPBS_JUSTRIGHT
+        LTEXT       "%", ID_DUMMY, 312, 74, 12, 8
+        CONTROL     "Non-~Proportional", ID_NONPROP , 185, 58, 85, 10, WC_BUTTON, BS_AUTO3STATE | WS_TABSTOP | WS_VISIBLE | WS_GROUP
+        SPINBUTTON  ID_NONPROPSPIN, 270, 59, 37, 12, SPBS_NUMERICONLY | SPBS_MASTER | SPBS_JUSTRIGHT
+        LTEXT       "positions/pixel", ID_DUMMY, 312, 60, 67, 8
+
+	END
+END
+
+DLGTEMPLATE ID_TIMER_OPTIONS LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    DIALOG  "Timer Scrolling Options", ID_TIMER_OPTIONS, 0, 0, 300, 135, FS_NOBYTEALIGN | NOT
+			 FS_DLGBORDER
+	BEGIN
+       AUTOCHECKBOX    "~Default", ID_TIMERDEFAULT, 5, 135, 55, 10, WS_GROUP
+
+       AUTORADIOBUTTON "Decreasing ~Linear Function", ID_LINEAR_INVERSE_ON, 5, 125, 100, 10, WS_GROUP
+       AUTORADIOBUTTON "~Inverse Function", ID_LINEAR_INVERSE_OFF, 5, 90, 80, 10
+          LTEXT       "<timeout> ms = ", ID_DUMMY, 15, 115, 50, 8
+          SPINBUTTON  ID_MSRANGE, 65, 115, 37, 12, SPBS_NUMERICONLY | SPBS_MASTER | SPBS_JUSTRIGHT
+          LTEXT       "ms -", ID_DUMMY, 105, 115, 40, 8
+          ENTRYFIELD  "", ID_SLOPE, 25, 106, 24, 7, ES_MARGIN
+          LTEXT       "ms/pixel * <pointer distance> pixel", ID_DUMMY, 57, 105, 100, 8
+
+          LTEXT       "<timeout> ms = ", ID_DUMMY, 15, 80, 50, 8 
+          SPINBUTTON  ID_MSPIX, 65, 80, 37, 12, SPBS_NUMERICONLY | SPBS_MASTER | SPBS_JUSTRIGHT
+          LTEXT       "ms * pixel / ", ID_DUMMY, 105, 80, 100, 8
+          LTEXT       "<pointer distance> pixel", ID_DUMMY, 65, 70, 100, 8
+
+       AUTORADIOBUTTON "~Proportional", ID_TIMER_NONPROP_OFF, 5, 55, 70, 10, WS_GROUP
+       AUTORADIOBUTTON "~Non-Proportional", ID_TIMER_NONPROP_ON, 5, 40, 70, 10
+          LTEXT       "1 / ", ID_DUMMY, 75, 55, 15, 8
+          SPINBUTTON  ID_RANGEFRACTION, 85, 55, 37, 12, SPBS_NUMERICONLY | SPBS_MASTER | SPBS_JUSTRIGHT
+          LTEXT       "range/timeout", ID_DUMMY, 125, 55, 67, 8
+
+          SPINBUTTON  ID_POSPERTIMEOUT, 85, 40, 37, 12, SPBS_NUMERICONLY | SPBS_MASTER | SPBS_JUSTRIGHT
+          LTEXT       "positions/timeout", ID_DUMMY, 125, 40, 67, 8
+
+       LTEXT       "~Minimum pointer distance", ID_DUMMY, 5, 25, 80, 8, DT_MNEMONIC
+                   PRESPARAMS PP_FOREGROUNDCOLOR, 0
+       SPINBUTTON  ID_PIXMIN, 85, 25, 37, 12, SPBS_NUMERICONLY | SPBS_MASTER | SPBS_JUSTRIGHT
+       LTEXT       "pixels", ID_DUMMY, 125, 25, 67, 8
+       LTEXT       "Ma~ximum pointer distance", ID_DUMMY, 5, 10, 80, 8, DT_MNEMONIC
+                   PRESPARAMS PP_FOREGROUNDCOLOR, 0
+       SPINBUTTON  ID_PIXMAX, 85, 10, 37, 12, SPBS_NUMERICONLY | SPBS_MASTER | SPBS_JUSTRIGHT
+       LTEXT       "pixels (0 = infinity)", ID_DUMMY, 125, 10, 80, 8
+	END
+END
+
+
+DLGTEMPLATE ID_ABOUT LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+	DIALOG	"About", ID_ABOUT, 21, -16, 220, 135, FS_NOBYTEALIGN | NOT
+			 FS_DLGBORDER
+	BEGIN
+        LTEXT           "Hot Scroll PM Loader", ID_DUMMY, 11, 125, 130, 17
+						PRESPARAMS PP_FONTNAMESIZE, "14.Helv Bold"
+        CONTROL         ID_MAIN, ID_MAIN, 148, 124, 22, 16, WC_STATIC, SS_ICON | WS_VISIBLE
+        LTEXT           "1.1", ID_DUMMY, 13, 123, 42, 8
+						PRESPARAMS PP_FOREGROUNDCOLOR, 0x00FF0000
+						PRESPARAMS PP_FONTNAMESIZE, "10.Helv Bold"
+        LTEXT           "(C) 1998" , ID_DUMMY, 13, 107, 45, 8
+						PRESPARAMS PP_FOREGROUNDCOLOR, 0
+        ENTRYFIELD      "Samuel Audet <guardia@cam.org>", ID_DUMMY, 55, 107, 115, 8,
+                        ES_READONLY | ES_MARGIN
+        LTEXT           "Please send mail if you are using this program, ", ID_DUMMY, 13, 92, 145, 8
+        LTEXT           "but money is always better, thank you!", ID_DUMMY, 13, 84, 145, 8
+	END
+END

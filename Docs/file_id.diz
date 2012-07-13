@@ -1,0 +1,23 @@
+              Hot Scroll 1.1
+==============================================
+Allows to scroll vertically and horizontally
+without Scroll Bars with either:
+
+- Scroll Lock
+- Any Keyboard Key or Mouse Button Combination.
+
+Features:
+
+- Normal Scrolling
+- Timer Scrolling (like StarOffice 5.0)
+- Support for different options for different
+  applications:
+  - Focus Change in Scroll Lock mode
+  - Adjustable Speed
+  - Non-proportional mode
+  - Fake Dynamic Scrolling
+  - Mouse Leash
+  - Reversed Scrolling
+  - Complete control over Timer Scrolling
+
+Now with a PM interface!

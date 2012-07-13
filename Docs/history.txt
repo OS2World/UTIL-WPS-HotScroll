@@ -1,0 +1,95 @@
+Reversed History
+================
+
++ New! lucky!
+- Changed
+* News
+
+1.1 November 29, 1998
+---
+
+- Patched the ESC key that made dialogs disappear in the PM Loader.
+
++ New Timer Scrolling (like in StarOffice 5.0)
++ New, the Mouse Pointer can be changed while Hot Scroll is active.
+- Loader.exe not updated.
+
+
+1.0  February 14, 1998
+---
+
+- Fake Instant Redraw -> Fake Dynamic Scrolling
+- Due to shared memory limitations, loader.exe now needs to be kept running
+  to use it with Hot Scroll.
+
++ Hot Scroll can now be set differently for different applications.  For
+  example, this means that you can Fake Dynamic Scrolling for DeScribe and
+  FaxWorks, but not for VIEWDOC.EXE, or enable non-proportional scrolling
+  for certain programs only.
+
++ And Hot Scroll can also be disabled for any application.
++ Fake Dynamic Scrolling now intercepts all scrolling messages.
+  It also works properly with more applications.
++ New option to enable horizontal or vertical scrolling only.
+
+* Bad News, didn't get hand manipulation to work.
+
+
+0.80  January 31, 1998
+----
+
+* Good news!!  I think I found a way to make "hand manipulation" scrolling
+  a reality, and also maybe a way to be able to follow the size changing
+  slider on the scroll bars. Check for next version...
+
+- Mouse leash now stops at border end, so that the scrolling won't seem to
+  sink in a black whole. That was HARD to design. I hope you'll enjoy it.
+
+- Speed changed to percentage.
+
++ A cute new PM interface for those who wants to use it.
++ Reserved Scrolling option added.
+
+
+0.70  January 21, 1998
+----
+
+- In Scroll Lock mode, the scrolling position now follows the mouse
+  position.  This means that for example, that the constant change of
+  scroll bar ranges while browsing won't be a problem anymore.
+
+- Fixed bug with the help screen showing mouse leash always off.
+
+- The options now toggle if no - or + is given.
+
++ New non-proportional mode.
++ New no focus lock option for scroll lock mode.
++ New fake instant redraw feature.
+
+
+0.60  January 18, 1998
+----
+
+* Oh, what do you know... I was not the first one to do this kind of
+  program.  Warp Enhancer 0.25 has that feature also, but I tried it out and
+  here what comes out of it:
+     - You can only use MB3.
+     - Horizontal scrolling doesn't work.
+     - Has no sense of proportions.  Gets difficult to scroll large and
+       small ranges.
+     - Does not continue scrolling in the original window when the mouse
+       pointer isn't over it anymore.
+  Thanks to Christoph Bratschi <cbratschi@datacomm.ch> for pointing it out.
+
++ New scrolling speed option.
++ New mouse leash option.
++ Ability to use a lot more keyboard/mouse combinations.
++ Parameters are now saved in HOTSCRL.INI.
+- Now checks for the owner of the scroll bars instead of just their
+  parents.  ProNews/2 now half works.
+
+
+0.52  January 14, 1998
+----
+
++ Initial public release

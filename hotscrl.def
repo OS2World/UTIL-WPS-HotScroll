@@ -1,0 +1,11 @@
+LIBRARY hotscrl INITINSTANCE TERMINSTANCE
+DESCRIPTION ' Hot Scroll 1.1  (C) 1998 Samuel Audet <guardia@cam.org>'
+PROTMODE
+DATA MULTIPLE NONSHARED LOADONCALL
+SEGMENTS
+   SHAREDMEM CLASS 'DATA' SHARED
+EXPORTS
+   HotScrollHookInit @1
+   HotScrollHookKill @2
+   HotScrollWaitLoaded @3
+   HotScrollLoaded     @4

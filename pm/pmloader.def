@@ -1,0 +1,6 @@
+NAME HotScrollPMLoader WINDOWAPI
+DESCRIPTION ' Hot Scroll 1.1 PM Loader (C) 1998 Samuel Audet <guardia@cam.org>'
+IMPORTS  hotscrl.HotScrollHookInit
+         hotscrl.HotScrollHookKill
+         hotscrl.HotScrollWaitLoaded
+         hotscrl.HotScrollLoaded
